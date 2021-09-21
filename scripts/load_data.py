@@ -14,13 +14,21 @@ class LoadData():
             conn = mysql.connect(host='localhost',
                                   user=os.getenv("USER"),
                                   password=os.getenv("PASSWORD"),
+    
                                  database=dbName, buffered=True)
             cur = conn.cursor()
             return conn, cur
         except Error as err:
             print("Database connection error: {}".format(err))
 
-
+    def create_db(self, dbName: str) -> None:
+        try:
+            conn, cur = self.connect()
+            cur.execute(f"CREATE DATABASE IF NOT EXISTS {dbName};")
+            conn.commit()
+            cur.close()
+        except Error as err:
+            print("Error : {}".format(err))
 
 
 if __name__ == "__main__":
