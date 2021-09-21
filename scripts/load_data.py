@@ -59,5 +59,5 @@ if __name__ == "__main__":
     # ld.create_db("SensorData")
     # ld.create_tables("SensorData", "I80_stations_schema.sql")
     # ld.create_tables("SensorData", "I80_davis_schema.sql")
-    ld.csv_to_sql("SensorData", "I80Stations", "../data/I80_stations.csv")
+    ld.csv_to_sql(" ", "I80Stations", "../data/I80_stations.csv")
     ld.csv_to_sql("SensorData", "I80Davis", "../data/I80_sample.txt")
