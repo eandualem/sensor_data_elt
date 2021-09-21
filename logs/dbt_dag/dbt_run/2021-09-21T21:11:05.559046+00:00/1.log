@@ -1,0 +1,107 @@
+[2021-09-21 21:32:20,619] {taskinstance.py:903} INFO - Dependencies all met for <TaskInstance: dbt_dag.dbt_run 2021-09-21T21:11:05.559046+00:00 [None]>
+[2021-09-21 21:32:20,641] {taskinstance.py:903} INFO - Dependencies all met for <TaskInstance: dbt_dag.dbt_run 2021-09-21T21:11:05.559046+00:00 [None]>
+[2021-09-21 21:32:20,641] {taskinstance.py:1095} INFO - 
+--------------------------------------------------------------------------------
+[2021-09-21 21:32:20,641] {taskinstance.py:1096} INFO - Starting attempt 1 of 2
+[2021-09-21 21:32:20,641] {taskinstance.py:1097} INFO - 
+--------------------------------------------------------------------------------
+[2021-09-21 21:32:20,708] {taskinstance.py:1115} INFO - Executing <Task(BashOperator): dbt_run> on 2021-09-21T21:11:05.559046+00:00
+[2021-09-21 21:32:20,716] {standard_task_runner.py:52} INFO - Started process 2581 to run task
+[2021-09-21 21:32:20,725] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'dbt_dag', 'dbt_run', '2021-09-21T21:11:05.559046+00:00', '--job-id', '5', '--pool', 'default_pool', '--raw', '--subdir', 'DAGS_FOLDER/elt_basic.py', '--cfg-path', '/tmp/tmp1wcyy6o0', '--error-file', '/tmp/tmp950_01tw']
+[2021-09-21 21:32:20,727] {standard_task_runner.py:77} INFO - Job 5: Subtask dbt_run
+[2021-09-21 21:32:20,846] {logging_mixin.py:109} INFO - Running <TaskInstance: dbt_dag.dbt_run 2021-09-21T21:11:05.559046+00:00 [running]> on host 047c4bf0435b
+[2021-09-21 21:32:20,914] {taskinstance.py:1254} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=eandualem@gmail.com
+AIRFLOW_CTX_DAG_OWNER=elias
+AIRFLOW_CTX_DAG_ID=dbt_dag
+AIRFLOW_CTX_TASK_ID=dbt_run
+AIRFLOW_CTX_EXECUTION_DATE=2021-09-21T21:11:05.559046+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2021-09-21T21:11:05.559046+00:00
+[2021-09-21 21:32:20,915] {subprocess.py:52} INFO - Tmp dir root location: 
+ /tmp
+[2021-09-21 21:32:20,944] {subprocess.py:63} INFO - Running command: ['bash', '-c', 'dbt run']
+[2021-09-21 21:32:21,116] {subprocess.py:74} INFO - Output:
+[2021-09-21 21:32:21,206] {subprocess.py:78} INFO - bash: dbt: command not found
+[2021-09-21 21:32:21,207] {subprocess.py:82} INFO - Command exited with return code 127
+[2021-09-21 21:32:21,254] {taskinstance.py:1463} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1165, in _run_raw_task
+    self._prepare_and_execute_task_with_callbacks(context, task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1283, in _prepare_and_execute_task_with_callbacks
+    result = self._execute_task(context, task_copy)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1313, in _execute_task
+    result = task_copy.execute(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/bash.py", line 176, in execute
+    raise AirflowException('Bash command failed. The command returned a non-zero exit code.')
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code.
+[2021-09-21 21:32:21,277] {taskinstance.py:1513} INFO - Marking task as UP_FOR_RETRY. dag_id=dbt_dag, task_id=dbt_run, execution_date=20210921T211105, start_date=20210921T213220, end_date=20210921T213221
+[2021-09-21 21:32:21,487] {logging_mixin.py:109} WARNING - /home/***/.local/lib/python3.6/site-packages/***/utils/email.py:102 PendingDeprecationWarning: Fetching SMTP credentials from configuration variables will be deprecated in a future release. Please set credentials using a connection instead.
+[2021-09-21 21:32:21,488] {configuration.py:365} WARNING - section/key [smtp/smtp_user] not found in config
+[2021-09-21 21:32:21,489] {email.py:208} INFO - Email alerting: attempt 1
+[2021-09-21 21:32:21,511] {configuration.py:365} WARNING - section/key [smtp/smtp_user] not found in config
+[2021-09-21 21:32:21,511] {email.py:208} INFO - Email alerting: attempt 1
+[2021-09-21 21:32:21,512] {taskinstance.py:1519} ERROR - Failed to send email to: ['eandualem@gmail.com']
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1165, in _run_raw_task
+    self._prepare_and_execute_task_with_callbacks(context, task)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1283, in _prepare_and_execute_task_with_callbacks
+    result = self._execute_task(context, task_copy)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1313, in _execute_task
+    result = task_copy.execute(context=context)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/operators/bash.py", line 176, in execute
+    raise AirflowException('Bash command failed. The command returned a non-zero exit code.')
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1858, in email_alert
+    send_email(self.task.email, subject, html_content)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/email.py", line 66, in send_email
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/email.py", line 102, in send_email_smtp
+    send_mime_email(e_from=smtp_mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/email.py", line 210, in send_mime_email
+    conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/email.py", line 244, in _get_smtp_connection
+    else smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.6/smtplib.py", line 251, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.6/smtplib.py", line 336, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.6/smtplib.py", line 307, in _get_socket
+    self.source_address)
+  File "/usr/local/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1517, in handle_failure
+    self.email_alert(error)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/models/taskinstance.py", line 1860, in email_alert
+    send_email(self.task.email, subject, html_content_err)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/email.py", line 66, in send_email
+    **kwargs,
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/email.py", line 102, in send_email_smtp
+    send_mime_email(e_from=smtp_mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/email.py", line 210, in send_mime_email
+    conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.6/site-packages/airflow/utils/email.py", line 244, in _get_smtp_connection
+    else smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.6/smtplib.py", line 251, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.6/smtplib.py", line 336, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.6/smtplib.py", line 307, in _get_socket
+    self.source_address)
+  File "/usr/local/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+[2021-09-21 21:32:21,652] {local_task_job.py:151} INFO - Task exited with return code 1
+[2021-09-21 21:32:21,730] {local_task_job.py:261} INFO - 0 downstream tasks scheduled from follow-on schedule check
