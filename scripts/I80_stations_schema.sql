@@ -19,7 +19,5 @@ CREATE TABLE IF NOT EXISTS `I80Stations`
     `User_ID_3` TEXT DEFAULT NULL,
     `User_ID_4` TEXT DEFAULT NULL,
     PRIMARY KEY (`ID`)
-)
-ENGINE=InnoDB NOT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 
