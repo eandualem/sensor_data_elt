@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `TweetInformation` 
+CREATE TABLE IF NOT EXISTS `I80Davis` 
 (
     `date` timestamp NOT NULL,
     `time` timestamp NOT NULL,
