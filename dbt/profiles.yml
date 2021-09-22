@@ -1,0 +1,10 @@
+default:
+  target: dev
+  outputs:
+    dev:
+      type: mysql
+      server: localhost
+      port: 3303
+      schema: analytics
+      username: root
+      password: helloworld
