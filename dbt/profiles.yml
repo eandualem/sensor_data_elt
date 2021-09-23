@@ -6,5 +6,5 @@ default:
       server: mysqldb
       port: 3306
       schema: analytics
-      username: admin
-      password: admin
+      username: root
+      password: root

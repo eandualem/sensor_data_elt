@@ -18,7 +18,7 @@ default_args = {
 dag = DAG(
     'create_tables',
     default_args=default_args,
-    description='An Airflow DAG to populate data',
+    description='An Airflow DAG to create tables',
     schedule_interval=timedelta(days=1),
 )
 
