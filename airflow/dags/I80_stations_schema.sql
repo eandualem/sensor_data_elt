@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `I80Stations`
     `Dir` TEXT NOT NULL,
     `District` INT NOT NULL,
     `County` INT NOT NULL,
-    `City` INT DEFAULT NULL,
+    `City` TEXT DEFAULT NULL,
     `State_PM` DOUBLE NOT NULL,
     `Abs_PM` DOUBLE NOT NULL,
     `Latitude` DOUBLE NOT NULL,
@@ -20,3 +20,4 @@ CREATE TABLE IF NOT EXISTS `I80Stations`
     `User_ID_4` TEXT DEFAULT NULL,
     PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
+

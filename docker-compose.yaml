@@ -23,9 +23,12 @@ services:
     container_name: mysql_container_test
     ports:
       - 3306:3306
+    volumes:
+      - ./mysql.cnf:/etc/mysql/mysql.cnf  
+      - ./data:/var/lib/mysql-files/
 
   airflow:
-    build: .
+    build:
     restart: always
     environment:
       DBT_PROFILES_DIR: /dbt
@@ -57,10 +60,7 @@ services:
       - 8000:8080
     volumes:
       - ./dbt:/dbt
-      
       - ./airflow:/airflow
-      - ./data:/data
-
 
   adminer:
     image: adminer
