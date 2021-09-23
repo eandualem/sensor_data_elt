@@ -1,5 +1,6 @@
 from airflow import DAG
 from airflow.providers.mysql.operators.mysql import MySqlOperator
+from airflow.operators.email_operator import EmailOperator
 from datetime import datetime as dt
 from datetime import timedelta
 
@@ -22,18 +23,25 @@ dag = DAG(
     schedule_interval=timedelta(days=1),
 )
 
-mysql_task = MySqlOperator(
+create_table = MySqlOperator(
     task_id='create_table_mysql_external_file',
     mysql_conn_id='mysql_conn_id',
     sql='I80_davis_schema.sql',
     dag=dag,
 )
 
-mysql_task1 = MySqlOperator(
+create_table1 = MySqlOperator(
     task_id='create_table_mysql_external_file2',
     mysql_conn_id='mysql_conn_id',
     sql='I80_stations_schema.sql',
     dag=dag,
 )
 
-mysql_task >> mysql_task1
+email = EmailOperator(task_id='send_email',
+                      to='eandualem@gmail.com',
+                      subject='Daily report generated',
+                      html_content=""" <h1>Congratulations! Your store reports are ready.</h1> """,
+                      dag=dag,
+                      )
+
+create_table >> create_table1 >> email

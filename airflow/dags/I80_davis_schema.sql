@@ -1,4 +1,4 @@
-CREATE TABLE  IF NOT EXISTS `dbtdb.I80Davis` (
+CREATE TABLE  IF NOT EXISTS `I80Davis` (
   `date` text NOT NULL,
   `time` text NOT NULL,
   `station_id` double NOT NULL,

@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `dbtdb.I80Stations` 
+CREATE TABLE IF NOT EXISTS `I80Stations` 
 ( 
     `ID` INT NOT NULL,
     `Fwy` INT NOT NULL,

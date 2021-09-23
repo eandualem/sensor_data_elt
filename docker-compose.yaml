@@ -57,7 +57,10 @@ services:
       - 8000:8080
     volumes:
       - ./dbt:/dbt
+      
       - ./airflow:/airflow
+      - ./data:/data
+
 
   adminer:
     image: adminer

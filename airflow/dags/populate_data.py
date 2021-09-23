@@ -1,8 +1,9 @@
 from airflow import DAG
-from airflow.providers.mysql.operators.mysql import MySqlOperator
-from datetime import datetime as dt
 from datetime import timedelta
-
+from datetime import datetime as dt
+from airflow.operators.bash_operator import BashOperator
+from airflow.providers.mysql.operators.mysql import MySqlOperator
+from airflow.operators.email_operator import EmailOperator
 
 default_args = {
     'owner': 'elias',
@@ -16,24 +17,32 @@ default_args = {
 }
 
 dag = DAG(
-    'create_tables',
+    'populate_data',
     default_args=default_args,
     description='An Airflow DAG to populate data',
     schedule_interval=timedelta(days=1),
 )
 
-mysql_task = MySqlOperator(
-    task_id='create_table_mysql_external_file',
-    mysql_conn_id='mysql_conn_id',
-    sql='I80_davis_schema.sql',
-    dag=dag,
+check_file = BashOperator(
+    task_id="check_file",
+    bash_command="shasum ../../data/I80_stations.csv",
+    retries=2,
+    retry_delay=timedelta(seconds=15),
+    dag=dag
 )
 
-mysql_task1 = MySqlOperator(
-    task_id='create_table_mysql_external_file2',
-    mysql_conn_id='mysql_conn_id',
-    sql='I80_stations_schema.sql',
-    dag=dag,
+insert = MySqlOperator(
+    task_id='insert_I80_stations',
+    mysql_conn_id="mysql_conn_id",
+    sql="LOAD DATA INFILE '../../data/I80_stations.csv' INTO TABLE I80Stations FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 ROWS;",
+    dag=dag
 )
 
-mysql_task >> mysql_task1
+email = EmailOperator(task_id='send_email',
+                      to='eandualem@gmail.com',
+                      subject='Daily report generated',
+                      html_content=""" <h1>Congratulations! Your store reports are ready.</h1> """,
+                      dag=dag
+                      )
+
+check_file >> insert >> email
