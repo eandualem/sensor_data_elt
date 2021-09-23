@@ -3,8 +3,8 @@ default:
   outputs:
     dev:
       type: mysql
-      server: localhost
-      port: 3303
+      server: mysqldb
+      port: 3306
       schema: analytics
-      username: root
-      password: helloworld
+      username: admin
+      password: admin
