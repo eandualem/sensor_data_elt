@@ -1,4 +1,4 @@
-CREATE TABLE `richards` (
+CREATE TABLE IF NOT EXISTS `richards` (
   `timestamp` text,
   `flow1` double DEFAULT NULL,
   `occupancy1` double DEFAULT NULL,

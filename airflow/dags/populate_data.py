@@ -31,17 +31,31 @@ check_file = BashOperator(
     dag=dag
 )
 
-insert_I80_davis = MySqlOperator(
-    task_id='insert_I80_davis',
-    mysql_conn_id="mysql_conn_id",
-    sql='./insert_I80_davis.sql',
-    dag=dag
-)
+# insert_I80_davis = MySqlOperator(
+#     task_id='insert_I80_davis',
+#     mysql_conn_id="mysql_conn_id",
+#     sql='./insert_I80_davis.sql',
+#     dag=dag
+# )
 
 insert_I80_stations = MySqlOperator(
     task_id='insert_I80_stations',
     mysql_conn_id="mysql_conn_id",
     sql="./insert_I80_stations.sql",
+    dag=dag
+)
+
+# insert_richards = MySqlOperator(
+#     task_id='insert_richards',
+#     mysql_conn_id="mysql_conn_id",
+#     sql="./insert_richards.sql",
+#     dag=dag
+# )
+
+insert_station_summary = MySqlOperator(
+    task_id='insert_station_summary',
+    mysql_conn_id="mysql_conn_id",
+    sql='./insert_station_summary.sql',
     dag=dag
 )
 
@@ -52,4 +66,7 @@ email = EmailOperator(task_id='send_email',
                       dag=dag
                       )
 
-[insert_I80_davis, insert_I80_stations] >> email
+# [insert_I80_davis, insert_I80_stations,
+#     insert_richards, insert_station_summary] >> email
+
+[insert_I80_stations, insert_station_summary] >> email

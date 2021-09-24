@@ -1,4 +1,4 @@
-CREATE TABLE `station_summary` (
+CREATE TABLE IF NOT EXISTS `station_summary` (
   `ID` double DEFAULT NULL,
   `flow_99` double DEFAULT NULL,
   `flow_max` double DEFAULT NULL,

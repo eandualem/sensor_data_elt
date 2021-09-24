@@ -24,16 +24,30 @@ dag = DAG(
 )
 
 create_I80_davis_table = MySqlOperator(
-    task_id='create_table_mysql_external_file',
+    task_id='create_table_I80_davis',
     mysql_conn_id='mysql_conn_id',
     sql='I80_davis_schema.sql',
     dag=dag,
 )
 
 create_I80_stations_table = MySqlOperator(
-    task_id='create_table_mysql_external_file2',
+    task_id='create_table_I80_stations',
     mysql_conn_id='mysql_conn_id',
     sql='I80_stations_schema.sql',
+    dag=dag,
+)
+
+create_richards_table = MySqlOperator(
+    task_id='create_table_richards',
+    mysql_conn_id='mysql_conn_id',
+    sql='richards_schema.sql',
+    dag=dag,
+)
+
+create_station_summary_table = MySqlOperator(
+    task_id='create_table_station_summary',
+    mysql_conn_id='mysql_conn_id',
+    sql='station_summary_schema.sql',
     dag=dag,
 )
 
@@ -44,4 +58,5 @@ email = EmailOperator(task_id='send_email',
                       dag=dag,
                       )
 
-[create_I80_davis_table, create_I80_stations_table] >> email
+[create_I80_davis_table, create_I80_stations_table,
+    create_richards_table, create_station_summary_table] >> email
