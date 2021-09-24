@@ -1,6 +1,5 @@
-CREATE TABLE  IF NOT EXISTS `I80Davis` (
-  `date` text NOT NULL,
-  `time` text NOT NULL,
+CREATE TABLE  IF NOT EXISTS `I80Davis2` (
+  `date_time` text NOT NULL,
   `station_id` double NOT NULL,
   `col3` double DEFAULT NULL,
   `col4` double DEFAULT NULL,

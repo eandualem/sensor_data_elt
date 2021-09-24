@@ -24,11 +24,11 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./mysql.cnf:/etc/mysql/mysql.cnf  
+      - ./mysql.cnf:/etc/mysql/mysql.cnf
       - ./data:/var/lib/mysql-files/
 
   airflow:
-    build:
+    build: .
     restart: always
     environment:
       DBT_PROFILES_DIR: /dbt
@@ -57,16 +57,16 @@ services:
       - postgres-airflow
       - mysqldb
     ports:
-      - 8000:8080
+      - 8080:8080
     volumes:
       - ./dbt:/dbt
       - ./airflow:/airflow
 
   adminer:
-    image: adminer
+    image: dockette/adminer:dg
     restart: always
     ports:
-      - 8080:8080
+      - 8000:80
     depends_on:
       - postgres-airflow
       - mysqldb
