@@ -21,8 +21,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: dbtdb
     container_name: mysql_container_test
-    ports:
-      - 3306:3306
+    expose:
+      - 3306
     volumes:
       - ./mysql.cnf:/etc/mysql/mysql.cnf
       - ./data:/var/lib/mysql-files/
