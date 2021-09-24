@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `I80Stations`
     `District` INT NOT NULL,
     `County` INT NOT NULL,
     `City` TEXT DEFAULT NULL,
-    `State_PM` DOUBLE NOT NULL,
+    `State_PM` TEXT NOT NULL,
     `Abs_PM` DOUBLE NOT NULL,
     `Latitude` DOUBLE NOT NULL,
     `Longitude` DOUBLE NOT NULL,

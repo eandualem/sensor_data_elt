@@ -20,17 +20,17 @@ dag = DAG(
     'create_tables',
     default_args=default_args,
     description='An Airflow DAG to create tables',
-    schedule_interval=timedelta(days=1),
+    schedule_interval='@once',
 )
 
-create_table = MySqlOperator(
+create_I80_davis_table = MySqlOperator(
     task_id='create_table_mysql_external_file',
     mysql_conn_id='mysql_conn_id',
     sql='I80_davis_schema.sql',
     dag=dag,
 )
 
-create_table1 = MySqlOperator(
+create_I80_stations_table = MySqlOperator(
     task_id='create_table_mysql_external_file2',
     mysql_conn_id='mysql_conn_id',
     sql='I80_stations_schema.sql',
@@ -40,8 +40,8 @@ create_table1 = MySqlOperator(
 email = EmailOperator(task_id='send_email',
                       to='eandualem@gmail.com',
                       subject='Daily report generated',
-                      html_content=""" <h1>Congratulations! Your store reports are ready.</h1> """,
+                      html_content=""" <h1>Congratulations! The tables are created.</h1> """,
                       dag=dag,
                       )
 
-create_table >> create_table1 >> email
+[create_I80_davis_table, create_I80_stations_table] >> email

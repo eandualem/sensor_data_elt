@@ -3,7 +3,6 @@ INFILE '/var/lib/mysql-files/I80_davis.txt'
 INTO TABLE I80Davis 
 FIELDS TERMINATED BY ',' 
 LINES TERMINATED BY '\n' 
-IGNORE 1 ROWS
 (date_time, station_id, @vcol3, @vcol4, @vcol5, @vcol6, @vcol7, @vcol8, @vcol9, @vcol10, @vcol11, @vcol12, @vcol13, @vcol14, @vcol15, @vcol16, @vcol17, @vcol18, @vcol19, @vcol20, @vcol21, @vcol22, @vcol23, @vcol24, @vcol25, @vcol26) 
 SET col3 = NULLIF( @vcol3, ''), 
     col4 = NULLIF( @vcol4, ''), 

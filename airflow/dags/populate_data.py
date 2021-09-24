@@ -20,7 +20,7 @@ dag = DAG(
     'populate_data',
     default_args=default_args,
     description='An Airflow DAG to populate data',
-    schedule_interval=timedelta(days=1),
+    schedule_interval="@once",
 )
 
 check_file = BashOperator(
@@ -31,14 +31,14 @@ check_file = BashOperator(
     dag=dag
 )
 
-insert = MySqlOperator(
+insert_I80_davis = MySqlOperator(
     task_id='insert_I80_davis',
     mysql_conn_id="mysql_conn_id",
     sql='./insert_I80_davis.sql',
     dag=dag
 )
 
-insert1 = MySqlOperator(
+insert_I80_stations = MySqlOperator(
     task_id='insert_I80_stations',
     mysql_conn_id="mysql_conn_id",
     sql="./insert_I80_stations.sql",
@@ -48,8 +48,8 @@ insert1 = MySqlOperator(
 email = EmailOperator(task_id='send_email',
                       to='eandualem@gmail.com',
                       subject='Daily report generated',
-                      html_content=""" <h1>Congratulations! Your store reports are ready.</h1> """,
+                      html_content=""" <h1>Congratulations! Data populated.</h1> """,
                       dag=dag
                       )
 
-insert >> email
+[insert_I80_davis, insert_I80_stations] >> email

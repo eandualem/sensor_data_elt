@@ -21,6 +21,12 @@ dag = DAG(
     schedule_interval=timedelta(days=1),
 )
 
+dbt_debug = BashOperator(
+    task_id='dbt_debug',
+    bash_command='dbt debug',
+    dag=dag
+)
+
 dbt_run = BashOperator(
     task_id='dbt_run',
     bash_command='dbt run',
@@ -33,4 +39,4 @@ dbt_test = BashOperator(
     dag=dag
 )
 
-dbt_run >> dbt_test
+dbt_debug >> dbt_run >> dbt_test
