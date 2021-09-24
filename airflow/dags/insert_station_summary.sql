@@ -2,4 +2,5 @@ LOAD DATA
 INFILE '/var/lib/mysql-files/station_summary.csv' 
 INTO TABLE Station_Summary 
 FIELDS TERMINATED BY ',' 
-LINES TERMINATED BY '\n';
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
