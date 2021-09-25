@@ -27,6 +27,7 @@ services:
       - 3306:3306
     volumes:
       - ./mysql.cnf:/etc/mysql/mysql.cnf
+      - ./my.cnf:/etc/mysql/my.cnf
       - ./data:/var/lib/mysql-files/
 
   airflow:
