@@ -92,7 +92,7 @@ Make sure you have docker installed on local machine.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/eandualem/sensor_data_elt
    ```
 2. Run
    ```sh
