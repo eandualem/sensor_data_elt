@@ -144,7 +144,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Elias Andualem - [@your_twitter](https://twitter.com/your_username) - eandualem@gmail.com
+Elias Andualem - eandualem@gmail.com
 
 Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
 
@@ -152,7 +152,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* [10 Academy](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+* [10 Academy](https://www.10academy.org/)
 
 
 
