@@ -25,18 +25,25 @@ dag = DAG(
 
 check_file = BashOperator(
     task_id="check_file",
-    bash_command="shasum /var/lib/mysql-files/I80_stations.csv",
+    bash_command="cat /etc/mysql/mysql.cnf",
     retries=2,
     retry_delay=timedelta(seconds=15),
     dag=dag
 )
 
-# insert_I80_davis = MySqlOperator(
-#     task_id='insert_I80_davis',
-#     mysql_conn_id="mysql_conn_id",
-#     sql='./insert_I80_davis.sql',
-#     dag=dag
-# )
+test = MySqlOperator(
+    task_id='test',
+    mysql_conn_id="mysql_conn_id",
+    sql='SHOW VARIABLES LIKE "secure_file_priv";',
+    dag=dag
+)
+
+insert_I80_davis = MySqlOperator(
+    task_id='insert_I80_davis',
+    mysql_conn_id="mysql_conn_id",
+    sql='./insert_I80_davis.sql',
+    dag=dag
+)
 
 insert_I80_stations = MySqlOperator(
     task_id='insert_I80_stations',
@@ -45,12 +52,12 @@ insert_I80_stations = MySqlOperator(
     dag=dag
 )
 
-# insert_richards = MySqlOperator(
-#     task_id='insert_richards',
-#     mysql_conn_id="mysql_conn_id",
-#     sql="./insert_richards.sql",
-#     dag=dag
-# )
+insert_richards = MySqlOperator(
+    task_id='insert_richards',
+    mysql_conn_id="mysql_conn_id",
+    sql="./insert_richards.sql",
+    dag=dag
+)
 
 insert_station_summary = MySqlOperator(
     task_id='insert_station_summary',
@@ -66,7 +73,7 @@ email = EmailOperator(task_id='send_email',
                       dag=dag
                       )
 
-# [insert_I80_davis, insert_I80_stations,
-#     insert_richards, insert_station_summary] >> email
+[insert_I80_davis, insert_I80_stations,
+    insert_richards, insert_station_summary] >> email
 
-[insert_I80_stations, insert_station_summary] >> email
+# [insert_I80_stations, insert_station_summary] >> email

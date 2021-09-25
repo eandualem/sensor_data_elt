@@ -18,7 +18,7 @@ dag = DAG(
     'dbt_dag',
     default_args=default_args,
     description='An Airflow DAG to invoke simple dbt commands',
-    schedule_interval=timedelta(days=1),
+    schedule_interval='@once',
 )
 
 check_directory = BashOperator(
