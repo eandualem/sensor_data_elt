@@ -16,13 +16,18 @@ services:
       # - ./sample_data:/sample_data
 
   mysqldb:
-    image: mysql:5.7
+    image: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: dbtdb
     container_name: mysql_container_test
+    expose:
+      - 3306
     ports:
       - 3306:3306
+    volumes:
+      - ./mysql.cnf:/etc/mysql/mysql.cnf
+      - ./data:/var/lib/mysql-files/
 
   airflow:
     build: .
@@ -54,19 +59,16 @@ services:
       - postgres-airflow
       - mysqldb
     ports:
-      - 8000:8080
+      - 8080:8080
     volumes:
       - ./dbt:/dbt
-      
       - ./airflow:/airflow
-      - ./data:/data
-
 
   adminer:
-    image: adminer
+    image: dockette/adminer:dg
     restart: always
     ports:
-      - 8080:8080
+      - 8000:80
     depends_on:
       - postgres-airflow
       - mysqldb
