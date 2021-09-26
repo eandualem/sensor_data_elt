@@ -1,0 +1,6 @@
+version: 2
+
+models:
+  - name: stations_sample
+    description: "sample tables from stations data"
+
