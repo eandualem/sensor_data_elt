@@ -1,6 +1,6 @@
 with final as (
 
-    SELECT *
+    SELECT timestamp, totalflow, weekday, hour, minute, second
     FROM dbtdb.richards
 
 )

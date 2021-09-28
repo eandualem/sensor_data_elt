@@ -2,7 +2,7 @@
 
 with final as (
 
-    SELECT *
+    SELECT ID,flow_max,flow_median,flow_total,n_obs
     FROM dbtdb.station_summary
 
 )
