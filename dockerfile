@@ -7,7 +7,7 @@ RUN pip install dbt-mysql
 RUN pip install mysql-connector-python
 
 RUN mkdir /project
-COPY scripts_airflow/ /project/scripts/
+COPY scripts/airflow/init.sh /project/scripts/
 COPY dbt/profiles.yml /root/.dbt/profiles.yml
 RUN chmod +x /project/scripts/init.sh
 ENTRYPOINT [ "/project/scripts/init.sh" ]

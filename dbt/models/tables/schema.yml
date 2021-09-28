@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: I80_davis_details_table
+    description: This table is created by merging I80_davis with I80_stations on ID.
+    columns:
+      - name: County
+        description: The county of the station
+
+      - name: City
+        description: City of the station
+
+  - name: station_summary_details_table
+    description: This table is created by merging station_summary with I80_stations on ID.
+    columns:
+      - name: County
+        description: The county of the station
+
+      - name: City
+        description: City of the station
+
+      - name: flow_max
+        description: The maximum traffic flow observed for a given station
+
+      - name: flow_median
+        description: The median of the amount of traffic flow observed for a given station
+
+      - name: flow_total
+        description: The total amount of traffic flow observed for a given station
+        tests:
+          - unique
+          - not_null
+
+      - name: n_obs
+        description: The number of observation recored for a given station]
+        tests:
+          - unique
+          - not_null

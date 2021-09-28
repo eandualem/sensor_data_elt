@@ -58,6 +58,7 @@ services:
     depends_on:
       - postgres-airflow
       - postgres-dbt
+      - postgres-redash
       - mysqldb
 
   postgres-redash:

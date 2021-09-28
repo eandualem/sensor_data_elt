@@ -1,0 +1,86 @@
+version: 2
+
+models:
+  - name: clean_I80_davis
+    description: "From January to October 2016, 30 second raw sensor data for the I80 corridor near Davis, CA. From col3 to col26, there are many missing values in the original source data. The missing values were filled in with 0."
+    columns:
+      - name: date_time
+        description: The date and time when the observation was recoreded
+        tests:
+          - not_null
+
+      - name: station_id
+        description: The id of for the station.
+        tests:
+          - unique
+          - not_null
+  
+  - name: I80_davis
+    description: Selected features from I80_davis
+    columns:
+      - name: date_time
+        description: The date and time when the observation was recoreded
+        tests:
+          - not_null
+
+      - name: station_id
+        description: The id of for the station.
+        tests:
+          - unique
+          - not_null
+
+  - name: I80_stations
+    description: Station metadata for 53 stations in the I80 corridor near Davis, CA
+    columns:
+      - name: ID
+        description: The id of for the station.
+        tests:
+          - unique
+          - not_null
+
+      - name: District
+        description: The district of the station
+
+      - name: County
+        description: The county of the station
+
+      - name: City
+        description: City of the station
+
+      - name: Name
+        description: Name of station
+        tests:
+          - not_null
+
+  - name: richards
+    description: 30 second time series for a single station (Richards Ave) near downtown Davis
+    columns:
+      - name: timestamp
+        description: The time when the data is recorded.
+
+  - name: station_summary
+    description: Summary statistics for each station 
+    columns:
+      - name: ID
+        description: The ID of station.
+        tests:
+          - unique
+          - not_null
+
+      - name: flow_max
+        description: The maximum traffic flow observed for a given station
+
+      - name: flow_median
+        description: The median of the amount of traffic flow observed for a given station
+
+      - name: flow_total
+        description: The total amount of traffic flow observed for a given station
+        tests:
+          - unique
+          - not_null
+
+      - name: n_obs
+        description: The number of observation recored for a given station]
+        tests:
+          - unique
+          - not_null
