@@ -41,28 +41,28 @@ test = MySqlOperator(
 insert_I80_davis = MySqlOperator(
     task_id='insert_I80_davis',
     mysql_conn_id="mysql_conn_id",
-    sql='../schema_mysql/insert_I80_davis.sql',
+    sql='./mysql_schema/insert_I80_davis.sql',
     dag=dag
 )
 
 insert_I80_stations = MySqlOperator(
     task_id='insert_I80_stations',
     mysql_conn_id="mysql_conn_id",
-    sql="../schema_mysql/insert_I80_stations.sql",
+    sql="./mysql_schema/insert_I80_stations.sql",
     dag=dag
 )
 
 insert_richards = MySqlOperator(
     task_id='insert_richards',
     mysql_conn_id="mysql_conn_id",
-    sql="../schema_mysql/insert_richards.sql",
+    sql="./mysql_schema/insert_richards.sql",
     dag=dag
 )
 
 insert_station_summary = MySqlOperator(
     task_id='insert_station_summary',
     mysql_conn_id="mysql_conn_id",
-    sql='../schema_mysql/insert_station_summary.sql',
+    sql='./mysql_schema/insert_station_summary.sql',
     dag=dag
 )
 
