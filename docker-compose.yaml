@@ -95,3 +95,11 @@ services:
     image: redis:latest
     restart: always
 
+  superset:
+    image: tylerfowler/superset
+    container_name: superset
+    env_file: .env
+    restart: always
+    ports:
+      - "8088:8088"
+

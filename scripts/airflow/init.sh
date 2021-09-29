@@ -10,7 +10,7 @@ AIRFLOW__WEBSERVER__SECRET_KEY="openssl rand -hex 30"
 export AIRFLOW__WEBSERVER__SECRET_KEY
 echo "-2---------------------------------------------------------------------------------"
 
-DBT_POSTGRESQL_CONN="postgresql+psycopg2://${DBT_POSTGRES_USER}:${DBT_POSTGRES_PASSWORD}@${DBT_POSTGRES_HOST}:${POSTGRES_PORT}/${DBT_POSTGRES_DB}"
+DBT_POSTGRESQL_CONN="postgresql+psycopg2://${DBT_POSTGRES_USER}:${DBT_POSTGRES_PASSWORD}@${DBT_POSTGRES_HOST}:${POSTGRES_PORT}/${DBT_POSTGRES_DB}""postgresql+psycopg2://${DBT_POSTGRES_USER}:${DBT_POSTGRES_PASSWORD}@${DBT_POSTGRES_HOST}:${POSTGRES_PORT}/${DBT_POSTGRES_DB}"
 
 cd /dbt && dbt compile
 rm -f /airflow/airflow-webserver.pid
