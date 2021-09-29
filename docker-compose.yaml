@@ -97,7 +97,6 @@ services:
 
   superset:
     image: tylerfowler/superset
-    container_name: superset
     env_file: .env
     restart: always
     ports:
