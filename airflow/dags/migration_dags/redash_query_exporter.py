@@ -1,8 +1,13 @@
+import os
+import sys
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
+from airflow.operators.python_operator import PythonOperator
 from datetime import datetime as dt
 from datetime import timedelta
-from query_exporter import export_queries
+sys.path.insert(0,"/airflow/dags/scripts")
+import scripts.query_exporter as script
+
 
 default_args = {
     'owner': 'elias',
@@ -22,10 +27,13 @@ dag = DAG(
     schedule_interval='@once',
 )
 
-export_query = PythonOperator(
+export_queries = PythonOperator(
     task_id='export_query',
-    python_callable=export_queries,
-    op_kwargs={'random_base': '3ZlvazduZdG8WpwUHE1zUh2qY6ij34rhGQzDrDV6'},
+    python_callable=script.export_queries,
+    op_kwargs={
+      'redash_url': 'http://localhost:5000',
+      'api_key': '3ZlvazduZdG8WpwUHE1zUh2qY6ij34rhGQzDrDV6'
+    },
 )
 
-generate_docs
+export_queries
