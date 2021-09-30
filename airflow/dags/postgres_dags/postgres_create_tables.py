@@ -25,7 +25,7 @@ dag = DAG(
 
 create_I80_davis_table = PostgresOperator(
     task_id='create_table_I80_davis',
-    sql='I80_davis_schema.sql',
+    sql='./postgres_schema/I80_davis_schema.sql',
     postgres_conn_id='postgres_conn_id',
     autocommit=True,
     database="dbtdb",
@@ -34,7 +34,7 @@ create_I80_davis_table = PostgresOperator(
 
 create_I80_stations_table = PostgresOperator(
     task_id='create_table_I80_stations',
-    sql='I80_stations_schema.sql',
+    sql='./postgres_schema/I80_stations_schema.sql',
     postgres_conn_id='postgres_conn_id',
     autocommit=True,
     database="dbtdb",
@@ -43,7 +43,7 @@ create_I80_stations_table = PostgresOperator(
 
 create_richards_table = PostgresOperator(
     task_id='create_table_richards',
-    sql='richards_schema.sql',
+    sql='./postgres_schema/richards_schema.sql',
     postgres_conn_id='postgres_conn_id',
     autocommit=True,
     database="dbtdb",
@@ -52,7 +52,7 @@ create_richards_table = PostgresOperator(
 
 create_station_summary_table = PostgresOperator(
     task_id='create_table_station_summary',
-    sql='station_summary_schema.sql',
+    sql='./postgres_schema/station_summary_schema.sql',
     postgres_conn_id='postgres_conn_id',
     autocommit=True,
     database="dbtdb",

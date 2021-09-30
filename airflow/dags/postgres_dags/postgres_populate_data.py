@@ -31,18 +31,9 @@ check_file = BashOperator(
     dag=dag
 )
 
-test = PostgresOperator(
-    task_id='test',
-    sql='SHOW VARIABLES LIKE "secure_file_priv";',
-    postgres_conn_id='postgres_conn_id',
-    autocommit=True,
-    database="dbtdb",
-    dag=dag
-)
-
 insert_I80_davis = PostgresOperator(
     task_id='insert_I80_davis',
-    sql='./insert_I80_davis.sql',
+    sql='./postgres_schema/insert_I80_davis.sql',
     postgres_conn_id='postgres_conn_id',
     autocommit=True,
     database="dbtdb",
@@ -51,7 +42,7 @@ insert_I80_davis = PostgresOperator(
 
 insert_I80_stations = PostgresOperator(
     task_id='insert_I80_stations',
-    sql="./insert_I80_stations.sql",
+    sql="./postgres_schema/insert_I80_stations.sql",
     postgres_conn_id='postgres_conn_id',
     autocommit=True,
     database="dbtdb",
@@ -60,7 +51,7 @@ insert_I80_stations = PostgresOperator(
 
 insert_richards = PostgresOperator(
     task_id='insert_richards',
-    sql="./insert_richards.sql",
+    sql="./postgres_schema/insert_richards.sql",
     postgres_conn_id='postgres_conn_id',
     autocommit=True,
     database="dbtdb",
@@ -69,7 +60,7 @@ insert_richards = PostgresOperator(
 
 insert_station_summary = PostgresOperator(
     task_id='insert_station_summary',
-    sql='./insert_station_summary.sql',
+    sql='./postgres_schema/insert_station_summary.sql',
     postgres_conn_id='postgres_conn_id',
     autocommit=True,
     database="dbtdb",

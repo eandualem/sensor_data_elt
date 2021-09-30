@@ -1,5 +1,6 @@
 from typing import List, Optional, Union
 from airflow.hooks.base import BaseHook
+from airflow.providers.mysql.hooks.mysql import MySqlHook
 from airflow.models import BaseOperator
 
 
@@ -49,19 +50,18 @@ class MigrationOperator(BaseOperator):
         self.insert_args = insert_args or {}
 
     def execute(self, context):
-        source_hook = BaseHook.get_hook(self.source_conn_id)
+        source_hook = MySqlHook.get_hook(self.source_conn_id)
         destination_hook = BaseHook.get_hook(self.destination_conn_id)
         offset=0
-        while true:
+        while True:
             self.log.info("Extracting data from %s", self.source_conn_id)
-            
-            filter="LIMIT 100 OFFSET {}".format(offset)
+            filter="LIMIT 100 OFFSET {};".format(offset)
             final_sql=self.sql+filter
             self.log.info("Executing: \n %s", self.sql+filter)
             results = source_hook.get_records(self.sql+filter)
             
-            self.log.info("Result: \n %s", results)
             if results:
+                self.log.info("Result: \n %s", results)
                 if self.preoperator:
                     self.log.info("Running preoperator")
                     self.log.info(self.preoperator)
@@ -70,3 +70,6 @@ class MigrationOperator(BaseOperator):
                 self.log.info("Inserting rows into %s", self.destination_conn_id)
                 destination_hook.insert_rows(table=self.destination_table, rows=results, **self.insert_args)
                 offset+=100
+            else:
+                self.log.info("Done, Success!")
+                break
