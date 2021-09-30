@@ -1,5 +1,5 @@
 from airflow import DAG
-from airflow.providers.mysql.operators.mysql import MySqlOperator
+from airflow.operators.postgres_operator import PostgresOperator
 from airflow.operators.email_operator import EmailOperator
 from datetime import datetime as dt
 from datetime import timedelta
@@ -17,37 +17,45 @@ default_args = {
 }
 
 dag = DAG(
-    'create_tables',
+    'postgres_create_tables',
     default_args=default_args,
     description='An Airflow DAG to create tables',
     schedule_interval='@once',
 )
 
-create_I80_davis_table = MySqlOperator(
+create_I80_davis_table = PostgresOperator(
     task_id='create_table_I80_davis',
-    mysql_conn_id='mysql_conn_id',
-    sql='./mysql_schema/I80_davis_schema.sql',
+    sql='./postgres_schema/I80_davis_schema.sql',
+    postgres_conn_id='postgres_conn_id',
+    autocommit=True,
+    database="dbtdb",
     dag=dag,
 )
 
-create_I80_stations_table = MySqlOperator(
+create_I80_stations_table = PostgresOperator(
     task_id='create_table_I80_stations',
-    mysql_conn_id='mysql_conn_id',
-    sql='./mysql_schema/I80_stations_schema.sql',
+    sql='./postgres_schema/I80_stations_schema.sql',
+    postgres_conn_id='postgres_conn_id',
+    autocommit=True,
+    database="dbtdb",
     dag=dag,
 )
 
-create_richards_table = MySqlOperator(
+create_richards_table = PostgresOperator(
     task_id='create_table_richards',
-    mysql_conn_id='mysql_conn_id',
-    sql='./mysql_schema/richards_schema.sql',
+    sql='./postgres_schema/richards_schema.sql',
+    postgres_conn_id='postgres_conn_id',
+    autocommit=True,
+    database="dbtdb",
     dag=dag,
 )
 
-create_station_summary_table = MySqlOperator(
+create_station_summary_table = PostgresOperator(
     task_id='create_table_station_summary',
-    mysql_conn_id='mysql_conn_id',
-    sql='./mysql_schema/station_summary_schema.sql',
+    sql='./postgres_schema/station_summary_schema.sql',
+    postgres_conn_id='postgres_conn_id',
+    autocommit=True,
+    database="dbtdb",
     dag=dag,
 )
 

@@ -3,7 +3,7 @@ version: '3'
 x-redash-service: &redash-service
   image: redash/redash:latest
   depends_on:
-  - postgres-redash
+  - postgres
   - redis
   env_file: redash.env
   restart: always
@@ -58,10 +58,10 @@ services:
     depends_on:
       - postgres-airflow
       - postgres-dbt
-      - postgres-redash
+      - postgres
       - mysqldb
 
-  postgres-redash:
+  postgres:
     image: postgres
     env_file: redash.env
     restart: always
@@ -94,4 +94,11 @@ services:
   redis:
     image: redis:latest
     restart: always
+
+  superset:
+    image: tylerfowler/superset
+    env_file: .env
+    restart: always
+    ports:
+      - "8088:8088"
 

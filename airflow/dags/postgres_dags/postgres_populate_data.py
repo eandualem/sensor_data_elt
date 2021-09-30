@@ -2,7 +2,7 @@ from airflow import DAG
 from datetime import timedelta
 from datetime import datetime as dt
 from airflow.operators.bash_operator import BashOperator
-from airflow.providers.mysql.operators.mysql import MySqlOperator
+from airflow.operators.postgres_operator import PostgresOperator
 from airflow.operators.email_operator import EmailOperator
 
 default_args = {
@@ -17,7 +17,7 @@ default_args = {
 }
 
 dag = DAG(
-    'populate_data',
+    'postgres_populate_data',
     default_args=default_args,
     description='An Airflow DAG to populate data',
     schedule_interval="@once",
@@ -31,38 +31,39 @@ check_file = BashOperator(
     dag=dag
 )
 
-test = MySqlOperator(
-    task_id='test',
-    mysql_conn_id="mysql_conn_id",
-    sql='SHOW VARIABLES LIKE "secure_file_priv";',
-    dag=dag
-)
-
-insert_I80_davis = MySqlOperator(
+insert_I80_davis = PostgresOperator(
     task_id='insert_I80_davis',
-    mysql_conn_id="mysql_conn_id",
-    sql='./mysql_schema/insert_I80_davis.sql',
+    sql='./postgres_schema/insert_I80_davis.sql',
+    postgres_conn_id='postgres_conn_id',
+    autocommit=True,
+    database="dbtdb",
     dag=dag
 )
 
-insert_I80_stations = MySqlOperator(
+insert_I80_stations = PostgresOperator(
     task_id='insert_I80_stations',
-    mysql_conn_id="mysql_conn_id",
-    sql="./mysql_schema/insert_I80_stations.sql",
+    sql="./postgres_schema/insert_I80_stations.sql",
+    postgres_conn_id='postgres_conn_id',
+    autocommit=True,
+    database="dbtdb",
     dag=dag
 )
 
-insert_richards = MySqlOperator(
+insert_richards = PostgresOperator(
     task_id='insert_richards',
-    mysql_conn_id="mysql_conn_id",
-    sql="./mysql_schema/insert_richards.sql",
+    sql="./postgres_schema/insert_richards.sql",
+    postgres_conn_id='postgres_conn_id',
+    autocommit=True,
+    database="dbtdb",
     dag=dag
 )
 
-insert_station_summary = MySqlOperator(
+insert_station_summary = PostgresOperator(
     task_id='insert_station_summary',
-    mysql_conn_id="mysql_conn_id",
-    sql='./mysql_schema/insert_station_summary.sql',
+    sql='./postgres_schema/insert_station_summary.sql',
+    postgres_conn_id='postgres_conn_id',
+    autocommit=True,
+    database="dbtdb",
     dag=dag
 )
 
@@ -75,5 +76,3 @@ email = EmailOperator(task_id='send_email',
 
 [insert_I80_davis, insert_I80_stations,
     insert_richards, insert_station_summary] >> email
-
-# [insert_I80_stations, insert_station_summary] >> email
