@@ -113,16 +113,16 @@ Adminer (formerly phpMinAdmin) is a full-featured database management tool writt
 - MYSQL:
    ```sh
    Navigate to `http://localhost:8080/` on the browser
-   use `postgres` databse
-   use `postgres-dbt` databse
-   use `dbtuser` for username
-   use `pssd` for password
+   use `mysqldb` server
+   use `dbtdb` database
+   use `root` for username
+   use `root` for password
    ```
 - Postgress:
    ```sh
    Navigate to `http://localhost:8080/` on the browser
-   use `postgres` databse
-   use `postgres-dbt` databse
+   use `postgres-dbt` server
+   use `dbtdb` database
    use `dbtuser` for username
    use `pssd` for password
    ```
@@ -136,7 +136,7 @@ Adminer (formerly phpMinAdmin) is a full-featured database management tool writt
 ### DBT:
 DBT is used for cleaning and transforming the data in the warehouses. 
 - Airflow is used for automation of running and testing dbt models
-- navigate to `https://sensordataelt.herokuapp.com/index.html#!/overview` to access dbt docs
+- navigate to `https://sensordataelt.herokuapp.com/index.html` to access dbt docs
 
 ### Redash
    ```sh
