@@ -71,9 +71,12 @@ Scalable ELT Tech Stack
 
 Tech Stack used in this project
 * [MYSQL](https://getbootstrap.com)
+* [PostgreSQL](https://www.postgresql.org/)
 * [Apache Airflow](https://jquery.com)
 * [dbt](https://laravel.com)
 * [Redash](https://laravel.com)
+* [Superset](https://superset.apache.org/)
+
 
 
 <!-- GETTING STARTED -->
