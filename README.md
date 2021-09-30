@@ -17,7 +17,7 @@
   <h3 align="center">Sensor Data ELT</h3>
 
   <p align="center">
-    The objective of this project was to migrate an ELT pipeline developed for the week 11 challenge using(MYSQL, DBT, Apache Airflow, and Redash) to a more scalable and robust ELT pipeline. This was accomplished by changing the two main components, namely the MySQL data warehouse to Postgres and the Redash dashboard to Superset.
+    A fully dockerized ELT pipeline using MySQL, PostgreSQL, Airflow, DBT, Redash and Superset.
     <br />
     <a href="https://sensordataelt.herokuapp.com/index.html"><strong>Explore the docs »</strong><a>
     <br />
@@ -64,8 +64,7 @@
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Scalable ELT Tech Stack
+The objective of this project was to migrate an ELT pipeline developed for the week 11 challenge using(MYSQL, DBT, Apache Airflow, and Redash) to a more scalable and robust ELT pipeline. This was accomplished by changing the two main components, namely the MySQL data warehouse to Postgres and the Redash dashboard to Superset.
 
 ### Built With
 
@@ -81,9 +80,6 @@ Tech Stack used in this project
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
