@@ -17,16 +17,16 @@
   <h3 align="center">Sensor Data ELT</h3>
 
   <p align="center">
-    A fully dockerized ELT pipeline project, using MYSQL, dbt, Apache Airflow, and Redash.
+    The objective of this project was to migrate an ELT pipeline developed for the week 11 challenge using(MYSQL, DBT, Apache Airflow, and Redash) to a more scalable and robust ELT pipeline. This was accomplished by changing the two main components, namely the MySQL data warehouse to Postgres and the Redash dashboard to Superset.
     <br />
-    <a href="https://github.com/eandualem/sensor_data_elt"><strong>Explore the docs »</strong></a>
+    <a href="https://sensordataelt.herokuapp.com/index.html"><strong>Explore the docs »</strong><a>
     <br />
     <br />
-    <a href="https://github.com/eandualem/sensor_data_elt">View Demo</a>
     ·
     <a href="https://github.com/eandualem/sensor_data_elt/issues">Report Bug</a>
     ·
     <a href="https://github.com/eandualem/sensor_data_elt/issues">Request Feature</a>
+    .
   </p>
 </p>
 
@@ -94,24 +94,58 @@ Make sure you have docker installed on local machine.
    ```sh
    git clone https://github.com/eandualem/sensor_data_elt
    ```
-2. Run
+2. Datawarehouse
+   ```sh
+   cd sensor_data_elt
+   ```
+3. Run
    ```sh
     docker-compose up
    ```
-3. Enter your API in `config.js`
-   ```JS
-   Navigate to `http://localhost:5000/` on the browser
-   ```
-
+4. Can access and Modefy the default configrations for each tool using the `.env` files.
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### Adminer: 
+Adminer (formerly phpMinAdmin) is a full-featured database management tool written in PHP. Used to access MYSQL and Postgres Databases.
+- MYSQL:
+   ```sh
+   Navigate to `http://localhost:8080/` on the browser
+   use `postgres` databse
+   use `postgres-dbt` databse
+   use `dbtuser` for username
+   use `pssd` for password
+   ```
+- Postgress:
+   ```sh
+   Navigate to `http://localhost:8080/` on the browser
+   use `postgres` databse
+   use `postgres-dbt` databse
+   use `dbtuser` for username
+   use `pssd` for password
+   ```
+### Airflow: 
+  Airflow is used for aurchestration and automation.
+   ```sh
+   Navigate to `http://localhost:8080/` on the browser
+   use `admin` for username
+   use `admin` for password
+   ```
+### DBT:
+DBT is used for cleaning and transforming the data in the warehouses. 
+- Airflow is used for automation of running and testing dbt models
+- navigate to `https://sensordataelt.herokuapp.com/index.html#!/overview` to access dbt docs
 
-_For more examples, please refer to the [Documentation](https://example.com)_
-
+### Redash
+   ```sh
+   open terminal and execute `docker-compose run — rm server create_db`
+   using adminer create a user and grant read access
+   Navigate to `http://localhost:5000/` on the browser
+   ```
+### Superset
+- navigate to `localhost:8088` to access Airflow 
 
 
 <!-- ROADMAP -->
@@ -169,6 +203,6 @@ Project Link: [https://github.com/eandualem/sensor_data_elt](https://github.com/
 [license-shield]: https://img.shields.io/github/license/eandualem/sensor_data_elt.svg?style=for-the-badge
 [license-url]: https://github.com/eandualem/sensor_data_elt/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[linkedin-url]: https://www.linkedin.com/in/elias-andualem-94a9a7195/
 [product-screenshot]: images/architecture.png
 
