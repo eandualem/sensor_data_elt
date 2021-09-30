@@ -1,30 +1,37 @@
 import os
-import glob
+import sys
+from airflow import DAG
+from airflow.operators.bash_operator import BashOperator
+from airflow.operators.python_operator import PythonOperator
+from airflow.operators.email_operator import EmailOperator
+from datetime import datetime as dt
+from datetime import timedelta
+sys.path.insert(0,"/airflow/dags/scripts")
+import scripts.mysql_to_postgres as script
 
 
-def convert_sql(sql_satement, target_path, file_name):
+default_args = {
+    'owner': 'elias',
+    'depends_on_past': False,
+    'email': ['eandualem@gmail.com'],
+    'email_on_failure': True,
+    'email_on_retry': True,
+    'retries': 1,
+    'start_date': dt(2021, 9, 13),
+    'retry_delay': timedelta(minutes=5)
+}
 
-  postgres_sql = sql_satement.lower()
-  postgres_sql = postgres_sql.replace(";", "")
-  postgres_sql = postgres_sql.strip()
+dag = DAG(
+    'schema_migration_dag',
+    default_args=default_args,
+    description='Export redash queries',
+    schedule_interval='@once',
+)
 
-  postgres_sql = postgres_sql.replace("ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci".lower(), "")
-  postgres_sql = postgres_sql.replace("ENGINE=InnoDB DEFAULT CHARSET=utf8".lower(), "")
-  postgres_sql = postgres_sql.replace("double".lower(), "double precision")
+migrate_schema = PythonOperator(
+    task_id='MYSQL_to_PostgresSQL',
+    python_callable=script.migrate_schema,
+    dag=dag
+)
 
-  postgres_sql = postgres_sql.replace("`", "")
-  postgres_sql = postgres_sql.strip() + ";"
-
-  if postgres_sql.split()[0] == 'load':
-    # to do load handler
-    pass
-  if postgres_sql.split()[0] == 'create':
-     with open(f'{target_path}/{file_name}', 'w', encoding = 'utf-8') as _file:
-      _file.write(postgres_sql)
-
-def convert_create_statements(src_path="/airflow/dags/mysqlSql/", tgt_path="/airflow/dags/postgresSql/"):
-  sql_files = glob.glob(f'{src_path}*.sql')
-  for sql_file in sql_files:
-    file_name = sql_file.split("/")[-1]
-    with open(sql_file, encoding = 'utf-8') as _file:
-      convert_sql(_file.read(), tgt_path, file_name=file_name)
+migrate_schema

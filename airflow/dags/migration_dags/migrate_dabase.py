@@ -3,6 +3,7 @@ import sys
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
+from airflow.operators.email_operator import EmailOperator
 from datetime import datetime as dt
 from datetime import timedelta
 sys.path.insert(0,"/airflow/dags/scripts")
@@ -26,17 +27,17 @@ dag = DAG(
     schedule_interval='@once',
 )
 
-sql = "SELECT * FROM I80_stations"
+sql = "SELECT * FROM I80Stations "
 I80_stations_migrator = script.MigrationOperator(
     task_id='I80_stations_migrator',
     source_conn_id='mysql_conn_id',
     destination_conn_id='postgres_conn_id',
-    destination_table="I80_stations",
+    destination_table="i80stations",
     sql=sql,
     dag=dag
 )
 
-sql = "SELECT * FROM richards"
+sql = "SELECT * FROM richards "
 richards_migrator = script.MigrationOperator(
     task_id='richards_migrator',
     source_conn_id='mysql_conn_id',
@@ -46,7 +47,7 @@ richards_migrator = script.MigrationOperator(
     dag=dag
 )
 
-sql = "SELECT * FROM station_summary"
+sql = "SELECT * FROM station_summary "
 station_summary_migrator = script.MigrationOperator(
     task_id='station_summary_migrator',
     source_conn_id='mysql_conn_id',
@@ -56,12 +57,12 @@ station_summary_migrator = script.MigrationOperator(
     dag=dag
 )
 
-sql = "SELECT * FROM I80_davis"
+sql = "SELECT * FROM I80Davis "
 I80_davis_migrator = script.MigrationOperator(
     task_id='I80_davis_migrator',
     source_conn_id='mysql_conn_id',
     destination_conn_id='postgres_conn_id',
-    destination_table="I80_davis",
+    destination_table="i80davis",
     sql=sql,
     dag=dag
 )
