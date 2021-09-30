@@ -34,6 +34,7 @@ export_queries = PythonOperator(
       'redash_url': 'http://localhost:5000',
       'api_key': '3ZlvazduZdG8WpwUHE1zUh2qY6ij34rhGQzDrDV6'
     },
+    dag=dag
 )
 
 export_queries
